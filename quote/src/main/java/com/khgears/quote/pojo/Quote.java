@@ -1,9 +1,18 @@
 package com.khgears.quote.pojo;
 
 public class Quote {
+    private int id;
     private String itemcode;
     private String itemname;
     private float price;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getItemcode() {
         return itemcode;
