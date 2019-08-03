@@ -19,11 +19,12 @@
             <div id="div4Update">
               
                             物料编码:
-                            <input type="text"    v-model="quoteUpdate.name" />
+                            <input type="text"    v-model="quoteUpdate.itemcode" />
                             <br>
                             物料名：
-                            <input type="number"    v-model="quoteUpdate.hp" />
-                            <input type="hidden"    v-model="quoteUpdate.id" />
+                            <input type="text"    v-model="quoteUpdate.itemname" />
+                            <input type="text"    v-model="quoteUpdate.price" />
+                            <input type="hidden"   v-model="quoteUpdate.id" />
                             <br>
                             <button type="button"  v-on:click="update">修改</button>                
                             <button type="button"  v-on:click="cancel">取消</button>                
@@ -43,7 +44,7 @@
     
     var data4Vue = {
             quote: [],
-            quoteUpdate: { id: 0, itemcode: '', itemname: '0',price:'0'}
+            quoteUpdate: { id: 0, itemcode: '', itemname: '',price:'0'}
 	};    	
     
     //ViewModel

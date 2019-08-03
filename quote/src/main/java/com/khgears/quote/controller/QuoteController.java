@@ -41,22 +41,25 @@ public class QuoteController {
     public Quote get(@PathVariable("id") int id) throws Exception {
         System.out.println(id);
         Quote h=quoteService.get(id);
-        System.out.println(h);
+        System.out.println("执行了查询操作,查询id为"+id+"的数据");
         return h;
     }
 
     @PostMapping("/quote")
     public String add(@RequestBody Quote h) throws Exception {
         quoteService.add(h);
+        System.out.println("执行了添加操作，添加对象为"+h);
         return "success";
     }
     @DeleteMapping("/quote/{id}")
     public String delete(Quote h) throws Exception {
         quoteService.delete(h.getId());
-        return "success11";
+        System.out.println("执行了删除操作，删除id为"+h.getId()+"数据");
+        return "success";
     }
     @PutMapping("/quote/{id}")
     public String update(@RequestBody Quote h) throws Exception {
+        System.out.println("执行了更新操作，把id的为"+h.getId()+"的数据更新为"+h);
         quoteService.update(h);
         return "success";
     }

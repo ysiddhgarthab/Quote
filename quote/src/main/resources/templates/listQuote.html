@@ -91,13 +91,13 @@
                         <td colspan="4">
                         	<br>
                             物料编码
-                            <input type="text"    v-model="quote4Add.name" />
+                            <input type="text"    v-model="quote4Add.itemcode" />
                             <br>
                             物料名称
-                            <input type="text"    v-model="quote4Add.hp" />
+                            <input type="text"    v-model="quote4Add.itemname" />
                             <br>
                             价格
-                            <input type="text"    v-model="quote4Add.hp" />
+                            <input type="text"    v-model="quote4Add.price" />
                             <br>
                             <br>
                             <button type="button"  v-on:click="add">增加</button>
@@ -120,7 +120,7 @@
     var vue = new Vue({
         el: '#app',
         data: data4Vue,
-        mounted:function(){ //mounted　表示这个 Vue 对象加载成功了
+        mounted:function(){ //当vue对象加载成功的时候执行，this.list(1)表示请求第一页的数据
         	this.list(1);
         },        
         methods: {     	
@@ -133,7 +133,7 @@
                 })     
         	},        	
             add: function (event) {
-            	var url = "quotes";
+            	var url = "quote";
             	
 				axios.post(url,this.quote4Add).then(function(response){
 					vue.list(1);
@@ -141,7 +141,7 @@
 				});
             },
             deleteQuote: function (id) {
-            	var url = "quotes/"+id;
+            	var url = "quote/"+id;
 				axios.delete(url).then(function(response){
 					vue.list(1);
 				});
