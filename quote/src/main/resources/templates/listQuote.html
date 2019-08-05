@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
-    <script src="./js/jquery.min.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="./js/vue.min.js"></script>
 	<script src="./js/axios.min.js"></script>    
     <style type="text/css">
@@ -83,7 +85,7 @@
                         <td>{{quote.price}}</td>
                         <td>
 	                        <a :href="'editQuote?id=' + quote.id ">编辑</a>
-                            <a href="#nowhere" @click="deleteQuote(quote.id)">删除</a>
+                            <a href="#nowhere" @click="confirm(quote.id)" data-toggle="modal" data-target="#exampleModal">删除1</a>
                         </td>
                     </tr>
 
@@ -100,12 +102,36 @@
                             <input type="text"    v-model="quote4Add.price" />
                             <br>
                             <br>
-                            <button type="button"  v-on:click="add">增加</button>
+                            <button type="button"  @click="add">增加</button>
                             <br> 
                          </td>                  
                     </tr>
-                    
 
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Launch demo modal
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" @click="deleteQuote(vue.quoteDeleteId)">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </table>
     </div>
   
@@ -113,6 +139,7 @@
     var data4Vue = {
             quotes: [],
             quote4Add: { id: 0, itemcode: '', itemname: '',price:'0'},
+            quoteDeleteId:0,
             pagination:{}
 	};
 
@@ -140,11 +167,22 @@
 					vue.quote4Add = { id: 0, name: '', hp: '0'}
 				});
             },
+            confirm:function(id){
+                this.quoteDeleteId=id;
+                return false;
+            },
             deleteQuote: function (id) {
-            	var url = "quote/"+id;
-				axios.delete(url).then(function(response){
-					vue.list(1);
-				});
+                // var cfm=window.confirm("是否确定删除？");
+                // if (cfm){
+
+                    var url = "quote/"+id;
+                    axios.delete(url).then(function(response){
+                        vue.list(1);
+                    });
+                // }
+            	// else{
+            	//     return false;
+                // }
             },
             jump: function(page){
 				if('first'== page && 1!=vue.pagination.pageNum)
@@ -158,9 +196,6 @@
 				
 				else if('last'== page && vue.pagination.pageNum!=vue.pagination.pages)
 					vue.list(vue.pagination.pages);
-				
-				
-				
             },
             jumpByNumber: function(start){
             	if(start!=vue.pagination.pageNum)

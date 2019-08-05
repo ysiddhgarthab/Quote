@@ -1,0 +1,18 @@
+body{
+    font-family: "Microsoft YaHei UI";
+}
+.item-table{
+    margin:100px auto 0 auto;
+    width: 70%;
+}
+input{
+    width: 100px;
+}
+th{
+    text-align:center;/** 设置水平方向居中 */
+    vertical-align:middle/** 设置垂直方向居中 */
+}
+tr{
+    text-align:center;/** 设置水平方向居中 */
+    vertical-align:middle/** 设置垂直方向居中 */
+}

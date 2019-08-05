@@ -65,15 +65,15 @@ public class QuoteController {
     }
 
     /*页面跳转 部分*/
-    @RequestMapping(value="/listQuote", method=RequestMethod.GET)
+    @RequestMapping(value="/", method=RequestMethod.GET)
     public ModelAndView listQuote(){
-        ModelAndView mv = new ModelAndView("listQuote");
+        ModelAndView mv = new ModelAndView("demo");
         return mv;
     }
 
-    @RequestMapping(value="/editQuote", method=RequestMethod.GET)
+    @RequestMapping(value="/login", method=RequestMethod.GET)
     public ModelAndView editQuote(){
-        ModelAndView mv = new ModelAndView("editQuote");
+        ModelAndView mv = new ModelAndView("login");
         return mv;
     }
 }
