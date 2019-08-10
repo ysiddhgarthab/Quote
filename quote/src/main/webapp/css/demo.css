@@ -1,13 +1,21 @@
 body{
     font-family: "Microsoft YaHei UI";
 }
+
 .item-table{
-    margin:100px auto 0 auto;
-    width: 70%;
+    margin:50px auto 0 auto;
 }
+
+.input-form{
+    width: 400px;
+    margin: 0 auto;
+}
+
 input{
     width: 100px;
 }
+
+/*设置表格的垂直水平居中*/
 th{
     text-align:center;/** 设置水平方向居中 */
     vertical-align:middle/** 设置垂直方向居中 */

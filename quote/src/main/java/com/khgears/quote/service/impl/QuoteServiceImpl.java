@@ -33,7 +33,7 @@ public class QuoteServiceImpl implements QuoteService {
     }
 
     @Override
-    public List<Quote> list() {
+    public List<Object> list() {
         return quoteMapper.list();
     }
 }

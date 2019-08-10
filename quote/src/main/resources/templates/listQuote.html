@@ -37,14 +37,6 @@
 		    text-decoration:none;        
         }
     </style>
-    <script>
-	    $(function(){
-	    	$("a.disableHref").click(function(event){
-	    		return false;
-// 	    		  event.preventDefault();
-	    	});
-	    });
-    </script>
 </head>
   
 <body>
@@ -56,12 +48,9 @@
 	                    		<a :class="{ disableHref: pagination.pageNum==1 }" href="#nowhere" @click="jump('first')">[first]</a>
 	                    		<a :class="{ disableHref: !pagination.hasPreviousPage }" href="#nowhere" @click="jump('pre')">[pre]</a>
 
-								
-			
 								<a href="#nowhere" :class="{disableHref:pagination.pageNum==i}"  v-for="i in pagination.navigatepageNums" @click="jumpByNumber(i)" >
 									{{i}}
 								</a>
-
 
 	                    		<a :class="{ disableHref: !pagination.hasNextPage }" href="#nowhere" @click="jump('next')">[next]</a>
 	                    		<a :class="{ disableHref: pagination.pageNum==pagination.pages }" href="#nowhere" @click="jump('last')">[last]</a>
@@ -77,15 +66,13 @@
                         <td>操作</td>
                     </tr>
 
-
-                                    
                     <tr v-for="quote in quotes ">
                         <td>{{quote.itemcode}}</td>
-                        <td>{{quote.itemname}}</td>
+                        <td>{{quote.u_describe}}</td>
                         <td>{{quote.price}}</td>
                         <td>
 	                        <a :href="'editQuote?id=' + quote.id ">编辑</a>
-                            <a href="#nowhere" @click="confirm(quote.id)" data-toggle="modal" data-target="#exampleModal">删除1</a>
+                            <a href="#nowhere" @click="confirm(quote.id)" data-toggle="modal" data-target="#deleteConfirm">删除1</a>
                         </td>
                     </tr>
 
@@ -108,12 +95,12 @@
                     </tr>
 
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteConfirm">
                     Launch demo modal
                 </button>
 
                 <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="deleteConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -127,14 +114,14 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" @click="deleteQuote(vue.quoteDeleteId)">Save changes</button>
+                                <button type="button" class="btn btn-primary " @click="deleteQuote(vue.quoteDeleteId)">Save changes</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </table>
     </div>
-  
+
     <script type="text/javascript">
     var data4Vue = {
             quotes: [],
@@ -172,9 +159,7 @@
                 return false;
             },
             deleteQuote: function (id) {
-                // var cfm=window.confirm("是否确定删除？");
-                // if (cfm){
-
+        	        $(".btn-secondary").trigger('click');
                     var url = "quote/"+id;
                     axios.delete(url).then(function(response){
                         vue.list(1);
@@ -203,6 +188,14 @@
             }
         }
     });
+    </script>
+    <script>
+        $(function(){
+            $("a.disableHref").click(function(event){
+                return false;
+// 	    		  event.preventDefault();
+            });
+        });
     </script>
 </body>
 </html>

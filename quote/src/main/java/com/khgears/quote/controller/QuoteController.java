@@ -1,6 +1,7 @@
 package com.khgears.quote.controller;
 import java.util.List;
 
+import com.baomidou.dynamic.datasource.annotation.DS;
 import com.khgears.quote.pojo.Quote;
 import com.khgears.quote.service.QuoteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +27,14 @@ public class QuoteController {
     QuoteService quoteService;
 
     /*restful 部分*/
+    @DS("sap")
     @GetMapping("/quote")
-    public PageInfo<Quote> list(@RequestParam(value = "start", defaultValue = "1") int start, @RequestParam(value = "size", defaultValue = "5") int size) throws Exception {
-        PageHelper.startPage(start,size,"id desc");
-        List<Quote> hs=quoteService.list();
-        System.out.println(hs.size());
+    public PageInfo<Object> list(@RequestParam(value = "start", defaultValue = "1") int start, @RequestParam(value = "size", defaultValue = "5") int size) throws Exception {
+        PageHelper.startPage(start,size,"docentry desc");
+        List<Object> hs=quoteService.list();
+        System.out.println(hs);
 
-        PageInfo<Quote> page = new PageInfo<>(hs,5); //5表示导航分页最多有5个，像 [1,2,3,4,5] 这样
+        PageInfo<Object> page = new PageInfo<>(hs,5); //5表示导航分页最多有5个，像 [1,2,3,4,5] 这样
 
         return page;
     }
@@ -51,12 +53,14 @@ public class QuoteController {
         System.out.println("执行了添加操作，添加对象为"+h);
         return "success";
     }
+
     @DeleteMapping("/quote/{id}")
     public String delete(Quote h) throws Exception {
         quoteService.delete(h.getId());
         System.out.println("执行了删除操作，删除id为"+h.getId()+"数据");
         return "success";
     }
+
     @PutMapping("/quote/{id}")
     public String update(@RequestBody Quote h) throws Exception {
         System.out.println("执行了更新操作，把id的为"+h.getId()+"的数据更新为"+h);

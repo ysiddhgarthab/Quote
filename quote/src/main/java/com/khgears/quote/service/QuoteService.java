@@ -9,5 +9,5 @@ public interface QuoteService {
     public void delete(int id);
     public Quote get(int id);
     public int update(Quote quote);
-    public List<Quote> list();
+    public List<Object> list();
 }
