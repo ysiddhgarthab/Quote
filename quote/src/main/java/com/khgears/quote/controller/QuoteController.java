@@ -1,24 +1,14 @@
 package com.khgears.quote.controller;
-import java.util.List;
-
 import com.baomidou.dynamic.datasource.annotation.DS;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.khgears.quote.pojo.Quote;
 import com.khgears.quote.service.QuoteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+import java.util.List;
 
 
 @RestController
@@ -33,9 +23,7 @@ public class QuoteController {
         PageHelper.startPage(start,size,"docentry desc");
         List<Object> hs=quoteService.list();
         System.out.println(hs);
-
         PageInfo<Object> page = new PageInfo<>(hs,5); //5表示导航分页最多有5个，像 [1,2,3,4,5] 这样
-
         return page;
     }
 
